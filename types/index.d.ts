@@ -27,11 +27,11 @@ export interface WatchObservable<T> {
 declare module "vue/types/vue" {
   interface Vue {
     $observables: Observables;
-    $watchAsObservable(expr: string, options?: WatchOptions): Observable<WatchObservable<any>>
+    $watchAsObservable<T>(expr: string, options?: WatchOptions): Observable<WatchObservable<T>>
     $watchAsObservable<T>(fn: (this: this) => T, options?: WatchOptions): Observable<WatchObservable<T>>
-    $eventToObservable(event: string): Observable<{name: string, msg: any}>
+    $eventToObservable<T>(event: string): Observable<{name: string, msg: T}>
     $fromDOMEvent(selector: string | null, event: string): Observable<Event>
-    $createObservableMethod(methodName: string): Observable<any>
+    $createObservableMethod<T>(methodName: string): Observable<T>
 
     $subscribeTo<T>(
       observable: Observable<T>,
@@ -41,7 +41,7 @@ declare module "vue/types/vue" {
     $subscribeTo<T>(
       observable: Observable<T>,
       next: (value: T) => void,
-      error?: (error: any) => void,
+      error?: (error: Error) => void,
       complete?: () => void,
     ): void;
   }
