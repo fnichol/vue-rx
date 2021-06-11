@@ -5,14 +5,7 @@ import { Observable, PartialObserver } from 'rxjs'
 export type Observables = Record<string, Observable<any>>
 
 declare module 'vue/types/options' {
-  interface ComponentOptions<
-    V extends Vue,
-    Data = DefaultData<V>,
-    Methods = DefaultMethods<V>,
-    Computed = DefaultComputed,
-    PropsDef = PropsDefinition<DefaultProps>,
-    Props = DefaultProps,
-  > {
+  interface ComponentOptions<V extends Vue> {
     subscriptions?: Observables | ((this: V) => Observables)
     domStreams?: string[]
     observableMethods?: string[] | Record<string, string>
